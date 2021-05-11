@@ -12,8 +12,8 @@ class NotesController < ApplicationController
     end
 
     def create 
-        @note = Note.find_or_create_by(notes_params)
-        if @ride 
+        @note = Note.create(notes_params)
+        if @note
             redirect_to note_path(@note)
         else
             render :new

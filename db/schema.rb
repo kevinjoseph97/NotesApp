@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_09_235925) do
+ActiveRecord::Schema.define(version: 2021_05_10_164924) do
+
+  create_table "classrooms", force: :cascade do |t|
+    t.string "subject_name"
+    t.integer "student_id", null: false
+    t.integer "note_id"
+    t.index ["note_id"], name: "index_classrooms_on_note_id"
+    t.index ["student_id"], name: "index_classrooms_on_student_id"
+  end
 
   create_table "notes", force: :cascade do |t|
     t.string "title"
@@ -31,4 +39,6 @@ ActiveRecord::Schema.define(version: 2021_05_09_235925) do
     t.index ["reset_password_token"], name: "index_students_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "classrooms", "notes"
+  add_foreign_key "classrooms", "students"
 end
